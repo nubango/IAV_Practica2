@@ -25,7 +25,6 @@ namespace UCM.IAV.Navegacion
         protected List<Vertex> vertices;
         protected List<List<Vertex>> neighbors;
         protected List<List<float>> costs;
-        protected Dictionary<int, int> instIdToId;
 
         //// this is for informed search like A*
         public delegate float Heuristic(Vertex a, Vertex b);
