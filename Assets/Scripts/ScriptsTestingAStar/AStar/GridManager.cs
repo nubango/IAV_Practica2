@@ -87,6 +87,13 @@ public class GridManager : MonoBehaviour
                 int col = GetColumn(indexCell);
                 int row = GetRow(indexCell);
 
+                //debug
+                if (row == 631)
+                {
+                    row = 631;
+                }
+                //debug
+                
                 //Also make the node as blocked status
                 nodes[row, col].MarkAsObstacle();
             }
