@@ -5,15 +5,15 @@ using System;
 public class Node : IComparable
 {
     #region Fields
-    public float nodeTotalCost;         //Total cost so far for the node
-    public float estimatedCost;         //Estimated cost from this node to the goal node
-    public bool bObstacle;              //Does the node is an obstacle or not
-    public Node parent;                 //Parent of the node in the linked list
-    public Vector3 position;            //Position of the node
+    public float nodeTotalCost;         // Coste total real hasta este nodo
+    public float estimatedCost;         // Coste estimado desde este nodo hsta el nodo final
+    public bool bObstacle;              // Determina si en este nodo hay un obstaculo o no
+    public Node parent;                 // Nodo padre 
+    public Vector3 position;            // Posicion del nodo
     #endregion
 
     /// <summary>
-    //Default Constructor
+    // Constructor por defecto
     /// </summary>
     public Node()
     {
@@ -24,7 +24,7 @@ public class Node : IComparable
     }
 
     /// <summary>
-    //Constructor with adding position to the node creation
+    // Constructor añadiendole por parametro la posicion
     /// </summary>
     public Node(Vector3 pos)
     {
@@ -37,7 +37,7 @@ public class Node : IComparable
     }
 
     /// <summary>
-    //Make the node to be noted as an obstacle
+    // Hacer un nodo obstaculo
     /// </summary>
     public void MarkAsObstacle()
     {
@@ -45,9 +45,9 @@ public class Node : IComparable
     }
 
     /// <summary>
-    // This CompareTo methods affect on Sort method
-    // It applies when calling the Sort method from ArrayList
-    // Compare using the estimated total cost between two nodes
+    // El método CompareTo afecta a el método de ordenacion Sort
+    // Se aplica cuando se llama al método Sort desde ArrayList
+    // Comparar usando el coste estimado entre dos nodos
     /// </summary>
     public int CompareTo(object obj)
     {

@@ -174,13 +174,15 @@ public class GridManager : MonoBehaviour
 		
 
     /// <summary>
-    /// Get the neighour nodes in 4 different directions
+    /// Devuelve los nodos vecinos en las cuatro direcciones
     /// </summary>
     public void GetNeighbours(Node node, ArrayList neighbors)
     {
+        // Coge la posicion del nodo y devuelve la casilla más cercana 
         Vector3 neighborPos = node.position;
         int neighborIndex = GetGridIndex(neighborPos);
 
+        // transforma la casilla en fila y columna
         int row = GetRow(neighborIndex);
         int column = GetColumn(neighborIndex);
 
@@ -206,7 +208,7 @@ public class GridManager : MonoBehaviour
     }
 	
 	/// <summary>
-	/// Check the neighbour. If it's not obstacle, assigns the neighbour.
+	/// Mete el nodo vecino en la lista de adyacentes si no hay ningun obstáculo
 	/// </summary>
 	/// <param name='row'>
 	/// Row.

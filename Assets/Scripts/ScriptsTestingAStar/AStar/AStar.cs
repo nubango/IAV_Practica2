@@ -12,7 +12,7 @@ public class AStar
     #endregion
 
     /// <summary>
-    /// Calculate the final path in the path finding
+    /// Devuelve el camino final (se llama cuando se ha llegado a la salida)
     /// </summary>
     private static ArrayList CalculatePath(Node node)
     {
@@ -27,7 +27,8 @@ public class AStar
     }
 
     /// <summary>
-    /// Calculate the estimated Heuristic cost to the goal
+    /// Calcula el coste de el nodo actual al nodo final 
+    /// (la heurística usada es la distancia hasta el nodo final)
     /// </summary>
     private static float HeuristicEstimateCost(Node curNode, Node goalNode)
     {
@@ -36,11 +37,12 @@ public class AStar
     }
 
     /// <summary>
-    /// Find the path between start node and goal node using AStar Algorithm
+    /// Encuentra el camino más corto entre Teseo y la salida
     /// </summary>
     public static ArrayList FindPath(Node start, Node goal)
     {
-        //Start Finding the path
+        // Creamos la lista de nodos abiertos y metemos el nodo inicial (Teseo)
+        // el coste del nodo inicial es cero
         openList = new PriorityQueue();
         openList.Push(start);
         start.nodeTotalCost = 0.0f;
@@ -63,29 +65,29 @@ public class AStar
 
             #region CheckNeighbours
 
-            //Get the Neighbours
+            // Recorro la lista de vecinos por los que se puede ir (los que no tienen obstaculos)
             for (int i = 0; i < neighbours.Count; i++)
             {
-                //Cost between neighbour nodes
+                // Cojo el vecino y compruebo si no es un nodo ya explorado (no está en la lista de nodos cerrados)
                 Node neighbourNode = (Node)neighbours[i];
 
                 if (!closedList.Contains(neighbourNode))
                 {					
-					//Cost from current node to this neighbour node
+					// Coste estimado por la huristica del nodo actual al nodo vecino 
 	                float cost = HeuristicEstimateCost(node, neighbourNode);	
 	                
-					//Total Cost So Far from start to this neighbour node
+					// Coste total hasta el nodo vecino = coste real hasta el nodo actual + coste al nodo vecino estimado por la huristica
 	                float totalCost = node.nodeTotalCost + cost;
 					
-					//Estimated cost for neighbour node to the goal
+					// Coste estimado por la huristica desde el nodo vecino al nodo final
 	                float neighbourNodeEstCost = HeuristicEstimateCost(neighbourNode, goal);					
 					
-					//Assign neighbour node properties
+					// Asigno los valores al nodo vecino ()
 	                neighbourNode.nodeTotalCost = totalCost;
 	                neighbourNode.parent = node;
 	                neighbourNode.estimatedCost = totalCost + neighbourNodeEstCost;
 	
-	                //Add the neighbour node to the list if not already existed in the list
+	                // Añado el nodo vecino a la lista de nodos abiertos si todavia no ha sido añadido
 	                if (!openList.Contains(neighbourNode))
 	                {
 	                    openList.Push(neighbourNode);
@@ -95,18 +97,19 @@ public class AStar
 			
             #endregion
             
+            // añado el nodo actual a la lista de nodos cerrados y lo elimino de la de abiertos
             closedList.Add(node);
             openList.Remove(node);
-        }
+        } // fin while
 
-        //If finished looping and cannot find the goal then return null
+        // Si acaba el bucle y no ha encontrado la salida lanza un mensaje 
         if (node.position != goal.position)
         {
             Debug.LogError("Goal Not Found");
             return null;
         }
 
-        //Calculate the path based on the final node
+        // Calcula el camino desde la salida hasta la entrada (va de nodo padre en nodo padre hasta llegar al primer nodo)
         return CalculatePath(node);
     }
 }
