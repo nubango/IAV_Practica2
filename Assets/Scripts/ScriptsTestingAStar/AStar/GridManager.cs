@@ -1,5 +1,19 @@
 using UnityEngine;
 using System.Collections;
+/*
+ GridManager.cs 
+Lo que hace esta clase es analizar en el método Awake() el escenario y coge todos los 
+obstáculos y los mete en una lista de objetos y calcula la posicion de esos obstáculos 
+para ajustarlos a la cuadrícula, método CalculateObstacles().
+
+En el método CalculateObstacles lo que se hace es inicializar los nodos del tablero 
+(cuadrícula) y después situar los obstáculos. Coge la posicion de cada obstáculo 
+(de la lista de obstáculos) y marca el nodo (la casilla de la cudricula) más cercano como 
+obstáculo (atributo público bObstacle de Node.cs)
+
+En esta clase hay otros métodos que sirven para pintar la rejilla del tablero y para 
+asignar y acceder a los nodos vecinos.
+ */
 
 //Grid manager class handles all the grid properties
 public class GridManager : MonoBehaviour
@@ -86,13 +100,6 @@ public class GridManager : MonoBehaviour
                 int indexCell = GetGridIndex(data.transform.position);
                 int col = GetColumn(indexCell);
                 int row = GetRow(indexCell);
-
-                //debug
-                if (row == 631)
-                {
-                    row = 631;
-                }
-                //debug
                 
                 //Also make the node as blocked status
                 nodes[row, col].MarkAsObstacle();

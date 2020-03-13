@@ -1,6 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
+/*
+ TestCode.cs
+En esta clase lo que se hace es guardar el inicio y el fin del camino y llama al A* para calcularlo.
+También es aqui dónde está el método que pinta el camino (OnDrawGizmos)
+     */
 public class TestCode : MonoBehaviour 
 {
     private Transform startPos, endPos;
