@@ -1,5 +1,8 @@
-using UnityEngine;
-using System.Collections;
+/*
+ Código sacado del repositorio prorcionado en el enunciado de la práctica
+ https://github.com/PacktPublishing/Unity-Artificial-Intelligence-Programming-Fourth-Edition/tree/master/Chapter07
+ */
+
 /*
  GridManager.cs 
 Lo que hace esta clase es analizar en el método Awake() el escenario y coge todos los 
@@ -14,6 +17,9 @@ obstáculo (atributo público bObstacle de Node.cs)
 En esta clase hay otros métodos que sirven para pintar la rejilla del tablero y para 
 asignar y acceder a los nodos vecinos.
  */
+
+using UnityEngine;
+using System.Collections;
 
 //Grid manager class handles all the grid properties
 public class GridManager : MonoBehaviour

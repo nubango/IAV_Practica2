@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+ Código sacado de la documentación oficial de unity
+ https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
+ */
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +15,7 @@ public class CursorsMovement : MonoBehaviour
     public float speed = 6.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
+    public ArrayList nodes;
 
     private Vector3 moveDirection = Vector3.zero;
 
@@ -21,24 +28,34 @@ public class CursorsMovement : MonoBehaviour
     {
         if (characterController.isGrounded)
         {
-            // We are grounded, so recalculate
-            // move direction directly from axes
-
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
-            moveDirection *= speed;
-
-            if (Input.GetButton("Jump"))
+            if (Input.GetKey(KeyCode.Space))
             {
-                moveDirection.y = jumpSpeed;
+                //moveDirection = subtractVectors3(transform.position, ((Node)nodes[0]).position);
+                //nodes.RemoveAt(0);
+
+                moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+                moveDirection *= speed;
+            }
+            else
+            {
+                moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+                moveDirection *= speed;
             }
         }
 
-        // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
-        // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
-        // as an acceleration (ms^-2)
         moveDirection.y -= gravity * Time.deltaTime;
 
-        // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
     }
+    private Vector3 subtractVectors3(Vector3 v1, Vector3 v2)
+    {
+        Vector3 result;
+
+        result.x = v1.x - v2.x;
+        result.y = 0;
+        result.z = v1.z - v2.z;
+
+        return result;
+    }
 }
+

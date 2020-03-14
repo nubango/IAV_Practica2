@@ -1,3 +1,8 @@
+/*
+ Código sacado del repositorio prorcionado en el enunciado de la práctica
+ https://github.com/PacktPublishing/Unity-Artificial-Intelligence-Programming-Fourth-Edition/tree/master/Chapter07
+ */
+
 using UnityEngine;
 using System.Collections;
 using System;
