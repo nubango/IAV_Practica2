@@ -21,6 +21,11 @@ public class TestCode : MonoBehaviour
     private Text nodeText;
     private string baseNodeText;
 
+    public GameObject timePanelTextGO;
+    public GameObject timeTextGO;
+    private Text timeText;
+    private string baseTimeText;
+
     public CursorsMovement cursorsMovement;
 
     private Transform startPos, endPos;
@@ -28,11 +33,16 @@ public class TestCode : MonoBehaviour
     public Node goalNode { get; set; }
 
     public ArrayList pathArray;
+    private ArrayList smoothArray;
+
+    bool smoothActive = false;
 
     GameObject objStartCube, objEndCube;
 
     private float elapsedTime = 0.0f;
     public float intervalTime = 1.0f; //Interval time between path finding
+
+    public float totalTimeOfCalculation;
 
     // Use this for initialization
     void Start()
@@ -42,13 +52,30 @@ public class TestCode : MonoBehaviour
 
         //AStar Calculated Path
         pathArray = new ArrayList();
+        smoothArray = new ArrayList();
         FindPath();
         lineRenderer.transform.position = new Vector3(0, 1, 0);
         nodeText = nodeTextGO.GetComponent<Text>();
         baseNodeText = nodeText.text;
+
+        timeText = timeTextGO.GetComponent<Text>();
+        baseTimeText = timeText.text;
     }
 
     // Update is called once per frame
+    //void Update()
+    //{
+    //    elapsedTime += Time.deltaTime;
+    //    if (Input.GetKey(KeyCode.Space))
+    //    {
+    //        if (elapsedTime >= intervalTime)
+    //        {
+    //            elapsedTime = 0.0f;
+    //            FindPath();
+    //        }
+    //    }
+    //}
+
     void Update()
     {
         elapsedTime += Time.deltaTime;
@@ -57,9 +84,22 @@ public class TestCode : MonoBehaviour
             if (elapsedTime >= intervalTime)
             {
                 elapsedTime = 0.0f;
+                totalTimeOfCalculation = Time.realtimeSinceStartup * 1000;
                 FindPath();
+                totalTimeOfCalculation = Time.realtimeSinceStartup * 1000 - totalTimeOfCalculation;
+                Debug.Log("TIEMPO: " + totalTimeOfCalculation.ToString("F3"));
             }
         }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            if (smoothActive) smoothActive = false;
+            else
+            {
+                smoothActive = true;
+                smoothPath();
+            }
+        }
+        updateUI();
     }
 
     void FindPath()
@@ -74,7 +114,33 @@ public class TestCode : MonoBehaviour
         pathArray = AStar.FindPath(startNode, goalNode);
     }
 
-    void OnDrawGizmos()
+    void smoothPath()
+    {
+        if (pathArray.Count <= 2)
+        {
+            smoothArray = pathArray;
+            return;
+        }
+
+        smoothArray.Clear();
+        smoothArray.Add(pathArray[0]);
+
+        int inputIndex = 2;
+
+        while (inputIndex < pathArray.Count - 1)
+        {
+            //If true, no linecast hit (blocked line)
+            if (Physics.Linecast(((Node)smoothArray[smoothArray.Count - 1]).position, ((Node)pathArray[inputIndex]).position))
+            {
+                smoothArray.Add(pathArray[inputIndex - 1]);
+            }
+            inputIndex++;
+        }
+
+        smoothArray.Add(pathArray[pathArray.Count - 1]);
+    }
+
+    void updateUI()
     {
         if (pathArray == null || !Input.GetKey(KeyCode.Space))
         {
@@ -85,11 +151,17 @@ public class TestCode : MonoBehaviour
             lineRenderer.SetPositions(positions);
             nodeTextGO.SetActive(false);
             nodePanelTextGO.SetActive(false);
+            timeTextGO.SetActive(false);
+            timePanelTextGO.SetActive(false);
             return;
         }
         nodePanelTextGO.SetActive(true);
         nodeTextGO.SetActive(true);
         nodeText.text = baseNodeText + pathArray.Count.ToString();
+
+        timePanelTextGO.SetActive(true);
+        timeTextGO.SetActive(true);
+        timeText.text = baseTimeText + totalTimeOfCalculation.ToString("F3") + " ms";
 
         if (pathArray.Count > 0)
         {
