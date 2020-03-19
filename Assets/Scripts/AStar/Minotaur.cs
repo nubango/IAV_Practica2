@@ -86,11 +86,10 @@ public class Minotaur : MonoBehaviour
                         obj.SetActive(ActivateVertexArea);
                         actionAreaVertex.Add(obj);
                     }
+                    int index = Mathf.Max(Mathf.Abs(x), Mathf.Abs(y));
+                    float minotaurCost = 1 / (Mathf.Sqrt(index * index) + 1);
 
-                    if (posFinal.x == 23 && posFinal.z == 29)
-                        posFinal.x = 23;
-
-                    node.cost = (transform.position - posFinal).magnitude * height;
+                    node.cost = minotaurCost * height;
                     actionArea.Add(node);
                 }
             }

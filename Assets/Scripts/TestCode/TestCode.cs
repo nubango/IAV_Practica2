@@ -157,7 +157,7 @@ public class TestCode : MonoBehaviour
         }
         nodePanelTextGO.SetActive(true);
         nodeTextGO.SetActive(true);
-        nodeText.text = baseNodeText + pathArray.Count.ToString();
+        nodeText.text = baseNodeText + AStar.numVisitedNodes.ToString();
 
         timePanelTextGO.SetActive(true);
         timeTextGO.SetActive(true);

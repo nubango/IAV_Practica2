@@ -16,6 +16,8 @@ public class AStar
 
     #endregion
 
+    static public int numVisitedNodes = 0;
+
     /// <summary>
     /// Devuelve el camino final (se llama cuando se ha llegado a la salida)
     /// </summary>
@@ -65,6 +67,7 @@ public class AStar
     {
         // Creamos la lista de nodos abiertos y metemos el nodo inicial (Teseo)
         // el coste del nodo inicial es cero
+        numVisitedNodes = 0;
         openList = new PriorityQueue();
         openList.Push(start);
         start.nodeTotalCost = 0.0f;
@@ -76,6 +79,7 @@ public class AStar
         while (openList.Length != 0)
         {
             node = openList.First();
+            numVisitedNodes++;
 
             if (node.position == goal.position)
             {
