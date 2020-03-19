@@ -37,8 +37,25 @@ public class AStar
     /// </summary>
     private static float HeuristicEstimateCost(Node curNode, Node goalNode)
     {
+        ArrayList actionArea = Minotaur.instance.getActionArea();
+
+        float minotaurCost = 0;
+        int i = 0;
+        bool find = false;
+        while (i < actionArea.Count && !find)
+        {
+            NodeMinotaur nodeMinotaur = (NodeMinotaur)actionArea[i];
+            if (curNode.position == nodeMinotaur.position || goalNode.position == nodeMinotaur.position)
+            {
+                find = true;
+                minotaurCost = nodeMinotaur.cost;
+            }
+            i++;
+        }
+
+
         Vector3 vecCost = curNode.position - goalNode.position;
-        return vecCost.magnitude;
+        return vecCost.magnitude + minotaurCost;
     }
 
     /// <summary>
@@ -64,7 +81,7 @@ public class AStar
             {
                 return CalculatePath(node);
             }
-			
+
             ArrayList neighbours = new ArrayList();
             GridManager.instance.GetNeighbours(node, neighbours);
 
@@ -77,31 +94,31 @@ public class AStar
                 Node neighbourNode = (Node)neighbours[i];
 
                 if (!closedList.Contains(neighbourNode))
-                {					
-					// Coste estimado por la huristica del nodo actual al nodo vecino 
-	                float cost = HeuristicEstimateCost(node, neighbourNode);	
-	                
-					// Coste total hasta el nodo vecino = coste real hasta el nodo actual + coste al nodo vecino estimado por la huristica
-	                float totalCost = node.nodeTotalCost + cost;
-					
-					// Coste estimado por la huristica desde el nodo vecino al nodo final
-	                float neighbourNodeEstCost = HeuristicEstimateCost(neighbourNode, goal);					
-					
-					// Asigno los valores al nodo vecino ()
-	                neighbourNode.nodeTotalCost = totalCost;
-	                neighbourNode.parent = node;
-	                neighbourNode.estimatedCost = totalCost + neighbourNodeEstCost;
-	
-	                // Añado el nodo vecino a la lista de nodos abiertos si todavia no ha sido añadido
-	                if (!openList.Contains(neighbourNode))
-	                {
-	                    openList.Push(neighbourNode);
-	                }
+                {
+                    // Coste estimado por la huristica del nodo actual al nodo vecino 
+                    float cost = HeuristicEstimateCost(node, neighbourNode);
+
+                    // Coste total hasta el nodo vecino = coste real hasta el nodo actual + coste al nodo vecino estimado por la huristica
+                    float totalCost = node.nodeTotalCost + cost;
+
+                    // Coste estimado por la huristica desde el nodo vecino al nodo final
+                    float neighbourNodeEstCost = HeuristicEstimateCost(neighbourNode, goal);
+
+                    // Asigno los valores al nodo vecino ()
+                    neighbourNode.nodeTotalCost = totalCost;
+                    neighbourNode.parent = node;
+                    neighbourNode.estimatedCost = totalCost + neighbourNodeEstCost;
+
+                    // Añado el nodo vecino a la lista de nodos abiertos si todavia no ha sido añadido
+                    if (!openList.Contains(neighbourNode))
+                    {
+                        openList.Push(neighbourNode);
+                    }
                 }
             }
-			
+
             #endregion
-            
+
             // añado el nodo actual a la lista de nodos cerrados y lo elimino de la de abiertos
             closedList.Add(node);
             openList.Remove(node);
@@ -110,7 +127,7 @@ public class AStar
         // Si acaba el bucle y no ha encontrado la salida lanza un mensaje 
         if (node.position != goal.position)
         {
-            Debug.LogError("Goal Not Found");
+            Debug.LogError("Salida no encontrada");
             return null;
         }
 

@@ -39,7 +39,7 @@ public class GridManager : MonoBehaviour
                 //  FindObjectOfType(...) returns the first GridManager object in the scene.
                 s_Instance = FindObjectOfType(typeof(GridManager)) as GridManager;
                 if (s_Instance == null)
-                    Debug.Log("Could not locate an GridManager object. \n You have to have exactly one GridManager in the scene.");
+                    Debug.Log("No se ha encontrado ningun objeto tipo GridManager en la escena.");
             }
             return s_Instance;
         }
@@ -106,13 +106,13 @@ public class GridManager : MonoBehaviour
                 int indexCell = GetGridIndex(data.transform.position);
                 int col = GetColumn(indexCell);
                 int row = GetRow(indexCell);
-                
+
                 //Also make the node as blocked status
                 nodes[row, col].MarkAsObstacle();
             }
         }
     }
-    
+
     /// <summary>
     /// Returns position of the grid cell in world coordinates
     /// </summary>
@@ -180,11 +180,11 @@ public class GridManager : MonoBehaviour
     public bool IsInBounds(Vector3 pos)
     {
         float width = numOfColumns * gridCellSize;
-        float height = numOfRows* gridCellSize;
+        float height = numOfRows * gridCellSize;
 
-        return (pos.x >= Origin.x &&  pos.x <= Origin.x + width && pos.x <= Origin.z + height && pos.z >= Origin.z);
+        return (pos.x >= Origin.x && pos.x <= Origin.x + width && pos.z <= Origin.z + height && pos.z >= Origin.z);
     }
-		
+
 
     /// <summary>
     /// Devuelve los nodos vecinos en las cuatro direcciones
@@ -219,19 +219,19 @@ public class GridManager : MonoBehaviour
         leftNodeColumn = column - 1;
         AssignNeighbour(leftNodeRow, leftNodeColumn, neighbors);
     }
-	
-	/// <summary>
-	/// Mete el nodo vecino en la lista de adyacentes si no hay ningun obstáculo
-	/// </summary>
-	/// <param name='row'>
-	/// Row.
-	/// </param>
-	/// <param name='column'>
-	/// Column.
-	/// </param>
-	/// <param name='neighbors'>
-	/// Neighbors.
-	/// </param>
+
+    /// <summary>
+    /// Mete el nodo vecino en la lista de adyacentes si no hay ningun obstáculo
+    /// </summary>
+    /// <param name='row'>
+    /// Row.
+    /// </param>
+    /// <param name='column'>
+    /// Column.
+    /// </param>
+    /// <param name='neighbors'>
+    /// Neighbors.
+    /// </param>
     void AssignNeighbour(int row, int column, ArrayList neighbors)
     {
         if (row != -1 && column != -1 && row < numOfRows && column < numOfColumns)
@@ -241,7 +241,7 @@ public class GridManager : MonoBehaviour
             {
                 neighbors.Add(nodeToAdd);
             }
-        } 
+        }
     }
 
     /// <summary>

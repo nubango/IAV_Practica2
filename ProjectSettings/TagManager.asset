@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - Start
   - End
+  - Minotaur
   layers:
   - Default
   - TransparentFX
