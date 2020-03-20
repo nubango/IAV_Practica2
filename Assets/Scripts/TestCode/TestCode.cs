@@ -8,10 +8,20 @@ using UnityEngine.UI;
 using System.Collections;
 
 /*
- TestCode.cs
+TestCode.cs
 En esta clase lo que se hace es guardar el inicio y el fin del camino y llama al A* para calcularlo.
-También es aqui dónde está el método que pinta el camino (OnDrawGizmos)
-     */
+También es aqui dónde está el método que pinta el camino (UpdateUI)
+MÉTODOS:
+- Update:
+    Detecta si se está pulsando la barra espaciadora para mostrar el camino más 
+    corto o la tecla "s" suavizar el movimiento del jugador al seguir el camino.
+- UpdateUI:
+    Sirve para catualizar la UI como su nombre indica. Actualiza tanto el número de 
+    nodos explorados como el tiempo que tarda en el A* en encontrar el camino mínimo. 
+    También pinta la linea que representa el camino más corto.
+- FindPath:
+    Coge la posicion inicial (jugador) y la final (Salida) y llama al A* para que calcule el camino más corto.
+ */
 public class TestCode : MonoBehaviour
 {
     public LineRenderer lineRenderer;
@@ -33,7 +43,7 @@ public class TestCode : MonoBehaviour
     public Node goalNode { get; set; }
 
     public ArrayList pathArray;
-    private ArrayList smoothArray;
+    public ArrayList smoothArray;
 
     bool smoothActive = false;
 
@@ -62,20 +72,6 @@ public class TestCode : MonoBehaviour
         baseTimeText = timeText.text;
     }
 
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    elapsedTime += Time.deltaTime;
-    //    if (Input.GetKey(KeyCode.Space))
-    //    {
-    //        if (elapsedTime >= intervalTime)
-    //        {
-    //            elapsedTime = 0.0f;
-    //            FindPath();
-    //        }
-    //    }
-    //}
-
     void Update()
     {
         elapsedTime += Time.deltaTime;
@@ -96,10 +92,10 @@ public class TestCode : MonoBehaviour
             else
             {
                 smoothActive = true;
-                smoothPath();
+                SmoothPath();
             }
         }
-        updateUI();
+        UpdateUI();
     }
 
     void FindPath()
@@ -114,7 +110,7 @@ public class TestCode : MonoBehaviour
         pathArray = AStar.FindPath(startNode, goalNode);
     }
 
-    void smoothPath()
+    void SmoothPath()
     {
         if (pathArray.Count <= 2)
         {
@@ -140,7 +136,7 @@ public class TestCode : MonoBehaviour
         smoothArray.Add(pathArray[pathArray.Count - 1]);
     }
 
-    void updateUI()
+    void UpdateUI()
     {
         if (pathArray == null || !Input.GetKey(KeyCode.Space))
         {

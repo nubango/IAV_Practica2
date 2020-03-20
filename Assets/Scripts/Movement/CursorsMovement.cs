@@ -2,7 +2,11 @@
  Código sacado de la documentación oficial de unity
  https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
  */
-
+ /*
+  Esta clase añade la funcionalidad de movimiento WASD al jugador y también 
+  implementa el movimiento automático al pulsar la barra espaciadora
+  
+  */
 
 using System.Collections;
 using System.Collections.Generic;

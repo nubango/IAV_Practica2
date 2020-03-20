@@ -2,6 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+Esta clase sirve para calcular la heurística en el A*.
+
+getActionArea:
+    sirve para calcular el peso de cada una de las casillas del rango del minotauro 
+    que afectan en el cálculo del coste de una casilla en la huerística.
+    Cuyando más alejada está la casilla menos afectará al calculo del camino.
+MÉTODOS Y ATRIBUTOS:
+- range:
+    rango de accion del minotauro (unidades en casillas 3 = 3 casillas).
+- height: 
+    es un atributo para calibrar cuanto peso tiene el área de acción de minotauro.
+- ActivateVertexArea:
+    sirve para activar visualmente el área de acción del minotauro.
+*/
+
 public struct NodeMinotaur
 {
     public Vector3 position;
