@@ -45,7 +45,7 @@ public class TestCode : MonoBehaviour
     public ArrayList pathArray;
     public ArrayList smoothArray;
 
-    bool smoothActive = false;
+    public bool smoothActive = false;
 
     GameObject objStartCube, objEndCube;
 
@@ -84,6 +84,7 @@ public class TestCode : MonoBehaviour
                 FindPath();
                 totalTimeOfCalculation = Time.realtimeSinceStartup * 1000 - totalTimeOfCalculation;
                 Debug.Log("TIEMPO: " + totalTimeOfCalculation.ToString("F3"));
+                if(smoothActive) SmoothPath();
             }
         }
         if (Input.GetKeyDown(KeyCode.S))

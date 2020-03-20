@@ -10,6 +10,7 @@ TagManager:
   - Start
   - End
   - Minotaur
+  - A*
   layers:
   - Default
   - TransparentFX

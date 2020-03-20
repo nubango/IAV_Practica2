@@ -13312,6 +13312,7 @@ GameObject:
   - component: {fileID: 1886912888}
   - component: {fileID: 1886912889}
   - component: {fileID: 1886912890}
+  - component: {fileID: 1886912891}
   m_Layer: 0
   m_Name: Start
   m_TagString: Start
@@ -13400,7 +13401,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1886912883}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff2a07537b5a654409ba716b8f7852a3, type: 3}
   m_Name: 
@@ -13442,6 +13443,21 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1886912891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886912883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbd03ae3b222f844985805a2899d6034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  jumpSpeed: 8
+  gravity: 20
 --- !u!1 &1887910168
 GameObject:
   m_ObjectHideFlags: 0
@@ -14694,7 +14710,7 @@ GameObject:
   - component: {fileID: 2039643114}
   m_Layer: 0
   m_Name: A*
-  m_TagString: Untagged
+  m_TagString: A*
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14717,6 +14733,7 @@ MonoBehaviour:
   timePanelTextGO: {fileID: 1637492305}
   timeTextGO: {fileID: 390247807}
   cursorsMovement: {fileID: 1886912888}
+  smoothActive: 0
   intervalTime: 0.5
   totalTimeOfCalculation: 0
 --- !u!4 &2039643115
