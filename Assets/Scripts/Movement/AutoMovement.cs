@@ -40,17 +40,16 @@ public class AutoMovement : MonoBehaviour
                     moveDirection = subtractVectors3(((Node)testCode.smoothArray[1]).position, transform.position).normalized;
 
                     //UnityEngine.Vector3 ray = characterController.velocity.normalized;
-                    //ray *= 0.2f;
 
 
                     //UnityEngine.RaycastHit hit;
 
                     ////COLLISION
-                    //if (UnityEngine.Physics.Raycast(transform.position, ray, out hit))
+                    //if (UnityEngine.Physics.Raycast(transform.position, ray, out hit, 0.3f) && hit.collider.gameObject.tag == "Obstacle")
                     //{
                     //    Debug.Log("HIT");
-                    //    Vector3 aux = hit.collider.gameObject.transform.position + hit.normal * 0.2f;
-                    //    moveDirection = moveDirection + aux.normalized;
+                    //    Vector3 aux = Vector3.Normalize(hit.collider.gameObject.transform.position + hit.normal) * 2.0f;
+                    //    moveDirection = moveDirection + aux;
                     //    moveDirection.Normalize();
                     //}
 
