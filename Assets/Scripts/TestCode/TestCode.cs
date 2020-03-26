@@ -36,16 +36,12 @@ public class TestCode : MonoBehaviour
     private Text timeText;
     private string baseTimeText;
 
-    public CursorsMovement cursorsMovement;
-
     private Transform startPos, endPos;
     public Node startNode { get; set; }
     public Node goalNode { get; set; }
 
     public ArrayList pathArray;
     public ArrayList smoothArray;
-
-    public bool smoothActive = false;
 
     GameObject objStartCube, objEndCube;
 
@@ -75,7 +71,7 @@ public class TestCode : MonoBehaviour
     void Update()
     {
         elapsedTime += Time.deltaTime;
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.S))
         {
             if (elapsedTime >= intervalTime)
             {
@@ -84,16 +80,7 @@ public class TestCode : MonoBehaviour
                 FindPath();
                 totalTimeOfCalculation = Time.realtimeSinceStartup * 1000 - totalTimeOfCalculation;
                 Debug.Log("TIEMPO: " + totalTimeOfCalculation.ToString("F3"));
-                if(smoothActive) SmoothPath();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            if (smoothActive) smoothActive = false;
-            else
-            {
-                smoothActive = true;
-                SmoothPath();
+                if (Input.GetKey(KeyCode.S)) SmoothPath();
             }
         }
         UpdateUI();
@@ -139,7 +126,7 @@ public class TestCode : MonoBehaviour
 
     void UpdateUI()
     {
-        if (pathArray == null || !Input.GetKey(KeyCode.Space))
+        if (pathArray == null || (!Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.S)))
         {
             Vector3[] positions = new Vector3[2];
             positions[0] = new Vector3(0, 1000, 0);

@@ -6662,7 +6662,6 @@ GameObject:
   - component: {fileID: 816368980}
   - component: {fileID: 816368979}
   - component: {fileID: 816368978}
-  - component: {fileID: 816368981}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6729,25 +6728,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816368977}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.9, y: 12.9, z: 36.7}
+  m_LocalPosition: {x: 20, y: 42.1, z: 22.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &816368981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 816368977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd1e8caf29bceda47a7a28c0aea9ee5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  personaje: {fileID: 1886912883}
 --- !u!1001 &817223242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13309,7 +13295,6 @@ GameObject:
   - component: {fileID: 1886912886}
   - component: {fileID: 1886912885}
   - component: {fileID: 1886912884}
-  - component: {fileID: 1886912888}
   - component: {fileID: 1886912889}
   - component: {fileID: 1886912890}
   - component: {fileID: 1886912891}
@@ -13394,21 +13379,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &1886912888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886912883}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff2a07537b5a654409ba716b8f7852a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 6
-  jumpSpeed: 8
-  gravity: 20
 --- !u!54 &1886912889
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14732,7 +14702,6 @@ MonoBehaviour:
   nodeTextGO: {fileID: 536758187}
   timePanelTextGO: {fileID: 1637492305}
   timeTextGO: {fileID: 390247807}
-  cursorsMovement: {fileID: 1886912888}
   smoothActive: 0
   intervalTime: 0.5
   totalTimeOfCalculation: 0
