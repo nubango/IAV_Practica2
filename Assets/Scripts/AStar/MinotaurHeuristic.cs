@@ -23,17 +23,17 @@ public struct NodeMinotaur
     public Vector3 position;
     public float cost;
 }
-public class Minotaur : MonoBehaviour
+public class MinotaurHeuristic : MonoBehaviour
 {
-    private static Minotaur s_Instance = null;
+    private static MinotaurHeuristic s_Instance = null;
 
-    public static Minotaur instance
+    public static MinotaurHeuristic instance
     {
         get
         {
             if (s_Instance == null)
             {
-                s_Instance = FindObjectOfType(typeof(Minotaur)) as Minotaur;
+                s_Instance = FindObjectOfType(typeof(MinotaurHeuristic)) as MinotaurHeuristic;
                 if (s_Instance == null)
                     Debug.Log("No se ha encontrado ningun objeto tipo Minotaur en la escena.");
             }

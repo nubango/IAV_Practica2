@@ -39,7 +39,7 @@ public class AStar
     /// </summary>
     private static float HeuristicEstimateCost(Node curNode, Node goalNode)
     {
-        ArrayList actionArea = Minotaur.instance.getActionArea();
+        ArrayList actionArea = MinotaurHeuristic.instance.getActionArea();
 
         float minotaurCost = 0;
         int i = 0;
